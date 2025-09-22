@@ -1,4 +1,4 @@
-module github.com/phatdev12/week3-web
+module github.com/phatdev12/week3-website
 
 go 1.25.1
 

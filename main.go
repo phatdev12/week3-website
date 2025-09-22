@@ -5,8 +5,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-	"github.com/phatdev12/week3-web/database"
-	"github.com/phatdev12/week3-web/models"
+	"github.com/phatdev12/week3-website/database"
+	"github.com/phatdev12/week3-website/models"
 )
 
 func main() {

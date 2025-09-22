@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/phatdev12/week3-web/models"
+	"github.com/phatdev12/week3-website/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
