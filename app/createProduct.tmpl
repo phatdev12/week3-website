@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Thêm sản phẩm</h1>
+    <input type="text" id="name" placeholder="Product Name">
+    <input type="number" id="price" placeholder="Price">
+    <input type="number" id="quantity" placeholder="Quantity">
+    <select id="category">
+      {{range .categories}}
+        <option value="{{.Id}}">{{.Name}}</option>
+      {{end}}
+    </select>
+    <button id="createBtn">Create Product</button>
+    <script>
+      document.getElementById('createBtn').addEventListener('click', async () => {
+        const name = document.getElementById('name').value;
+        const price = parseFloat(document.getElementById('price').value);
+        const quantity = parseInt(document.getElementById('quantity').value, 10);
+        const idCategory = document.getElementById('category').value;
+
+        const response = await fetch('/products', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ name, price, quantity, id_category: parseInt(idCategory) })
+        });
+
+        if (response.ok) {
+          alert('Hoàn thành!');
+          window.location.href = `/category/${idCategory}`;
+        } else {
+          alert('Tạo sản phẩm thất bại.');
+        }
+      });
+    </script>
+
+</body>
+  </html>
+    
