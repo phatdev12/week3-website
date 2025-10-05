@@ -1,0 +1,13 @@
+{
+  "name": "week3",
+  "version": "1.0.0",
+  "description": "> Tác giả: Từ Thắng Phát",
+  "main": "index.js",
+  "scripts": {
+    "dev": "go run main.go",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

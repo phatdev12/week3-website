@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/global.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Document</title>
+</head>
+<body class="flex justify-center items-center h-screen">
+    <form class="flex flex-col gap-4 p-4 container">
+        <input type="text" id="name" name="name" placeholder="Product Name" value="{{.product.Name}}" class="border p-2 rounded-xl">
+        <input type="number" id="price" name="price" placeholder="Price" value="{{.product.Price}}" class="border p-2 rounded-xl">
+        <input type="number" id="quantity" name="quantity" placeholder="Quantity" value="{{.product.Quantity}}" class="border p-2 rounded-xl">
+        <select id="category" name="id_category" class="border p-2 rounded-xl">
+            {{range .categories}}
+                <option value="{{.Id}}" {{if eq .Id $.product.IDCategory}}selected{{end}}>{{.Name}}</option>
+            {{end}}
+        </select>
+        <button type="button" class="bg-blue-500 text-white p-2 rounded-xl" onclick="updateProduct()">Update Product</button>
+    </form>
+    
+    <script>
+        async function updateProduct() {
+            const name = document.getElementById('name').value;
+            const price = parseFloat(document.getElementById('price').value);
+            const quantity = parseInt(document.getElementById('quantity').value);
+            const id_category = parseInt(document.getElementById('category').value);
+            const image_url = document.getElementById('image_url').value;
+            
+            try {
+                const response = await fetch('/products/{{.product.Id}}', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        name: name, 
+                        price: price, 
+                        quantity: quantity, 
+                        id_category: id_category,
+                        image_url: image_url
+                    })
+                });
+                
+                if (response.ok) {
+                    alert('Product updated successfully!');
+                    window.location.href = '/';
+                } else {
+                    const errorText = await response.text();
+                    alert('Failed to update product: ' + errorText);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to update product');
+            }
+        }
+    </script>
+</body>
+</html>

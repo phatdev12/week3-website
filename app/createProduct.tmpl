@@ -15,6 +15,7 @@
         <option value="{{.Id}}">{{.Name}}</option>
       {{end}}
     </select>
+    <input type="text" id="image_url" placeholder="Image URL">
     <button id="createBtn">Create Product</button>
     <script>
       document.getElementById('createBtn').addEventListener('click', async () => {
@@ -22,13 +23,14 @@
         const price = parseFloat(document.getElementById('price').value);
         const quantity = parseInt(document.getElementById('quantity').value, 10);
         const idCategory = document.getElementById('category').value;
+        const imageUrl = document.getElementById('image_url').value;
 
         const response = await fetch('/products', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ name, price, quantity, id_category: parseInt(idCategory) })
+          body: JSON.stringify({ name, price, quantity, id_category: parseInt(idCategory), image_url: imageUrl })
         });
 
         if (response.ok) {
